@@ -1,0 +1,39 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "roleId": 1,
+        "status": "Active"
+      },
+      {
+        "id": 2,
+        "name": "Admin User",
+        "email": "admin@example.com",
+        "password": "admin123",
+        "role": "admin"
+      },
+      {
+        "id": 3,
+        "name": "Regular User",
+        "email": "user@example.com",
+        "password": "user123",
+        "role": "user"
+      }
+    ],
+    "roles": [
+      {
+        "id": 1,
+        "name": "Admin",
+        "description": "Full access to all resources",
+        "permissions": [1, 2, 3]
+      }
+    ],
+    "permissions": [
+      { "id": 1, "name": "Read" },
+      { "id": 2, "name": "Write" },
+      { "id": 3, "name": "Delete" }
+    ]
+  }
+  
