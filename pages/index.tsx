@@ -67,12 +67,12 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="grid px-[20px] pt-[20px] grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white p-6 rounded-lg shadow flex items-center">
           <FaUsers className="text-4xl text-blue-600 mr-4" />
           <div>
             <h2 className="text-xl font-bold">{users}</h2>
-            <p>Total Users</p>
+            <p>Total Assign Users</p>
           </div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow flex items-center">

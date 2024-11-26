@@ -22,6 +22,13 @@
       "email": "adityakushinagar123@gmail.com",
       "roleId": "b36b",
       "status": "Active"
+    },
+    {
+      "id": "f3d5",
+      "name": "john cena",
+      "email": "john@gmail.com",
+      "roleId": "b36b",
+      "status": "Inactive"
     }
   ],
   "roles": [
@@ -65,15 +72,15 @@
   ],
   "permissions": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Read"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Write"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Delete"
     }
   ],

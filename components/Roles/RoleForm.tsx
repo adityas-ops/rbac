@@ -1,5 +1,4 @@
-// components/Roles/RoleForm.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface RoleFormProps {
   initialData?: {
@@ -15,6 +14,14 @@ const RoleForm: React.FC<RoleFormProps> = ({ initialData, permissions, onSubmit 
   const [name, setName] = useState(initialData?.name || '');
   const [description, setDescription] = useState(initialData?.description || '');
   const [selectedPermissions, setSelectedPermissions] = useState<number[]>(initialData?.permissions || []);
+
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name);
+      setDescription(initialData.description);
+      setSelectedPermissions(initialData.permissions);
+    }
+  }, [initialData]);
 
   const handlePermissionChange = (id: number) => {
     setSelectedPermissions((prev) =>

@@ -68,8 +68,8 @@ const PermissionsPage = () => {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Permissions</h1>
+       <div className="flex w-full px-[20px] sm:px-0 sm:pt-0 flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
+        <h1 className="sm:text-2xl text-xl font-bold text-center py-[10px] sm:py-0">Permissions</h1>
         <Button onClick={handleAdd}>Add Permission</Button>
       </div>
       <PermissionTable permissions={permissions} onEdit={handleEdit} onDelete={handleDelete} />

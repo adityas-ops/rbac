@@ -27,13 +27,13 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-blue-600 p-4 flex justify-between items-center">
-      <div className="text-white font-[700] text-[1.25rem] ">
+    <nav className=" fixed top-0 left-0 right-0  bg-white shadow-2xl border-b p-4 flex justify-between items-center">
+      <div className="text-black pl-[50px] font-[700] text-[1.25rem] ">
         {user ? `Welcome, ${user.name}!` : 'Welcome, Guest!'}
       </div>
       <button
         onClick={logout}
-        className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Logout
       </button>

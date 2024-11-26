@@ -19,7 +19,9 @@ interface RoleTableProps {
 
 const RoleTable: React.FC<RoleTableProps> = ({ roles, permissions, onEdit, onDelete }) => {
   const getPermissionNames = (permIds: number[]) =>
-    permIds.map((id) => permissions.find((perm) => perm.id === id)?.name).join(', ');
+    permIds.map((id) => permissions.find((perm) => perm.id == id)?.name).join(', ');
+
+  console.log('roles:', roles);
 
   return (
     <Table headers={['Name', 'Description', 'Permissions', 'Actions']}>

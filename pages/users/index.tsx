@@ -93,29 +93,37 @@ const UsersPage = () => {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Users</h1>
-        <Button onClick={handleAdd}>Add User</Button>
+      <div className="w-full h-full   ">
+        <div className="flex w-full px-[20px] sm:px-0 sm:pt-0 flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
+          <h1 className="sm:text-2xl text-xl font-bold text-center py-[10px] sm:py-0">Users</h1>
+          <Button onClick={handleAdd}>Add User</Button>
+        </div>
+        <div className=" overflow-hidden w-full ">
+
+          <UserTable users={users} roles={roles} onEdit={handleEdit} onDelete={handleDelete} />
+        </div>
+        {isModalOpen && (
+          <UserModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={handleSubmit}
+            initialData={
+              editingUser
+                ? {
+                    name: editingUser.name,
+                    email: editingUser.email,
+                    roleId: editingUser.roleId,
+                    status: editingUser.status,
+                  }
+                : undefined
+            }
+            roles={roles}
+          />
+        )}
       </div>
-      <UserTable users={users} roles={roles} onEdit={handleEdit} onDelete={handleDelete} />
-      <UserModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleSubmit}
-        initialData={
-          editingUser
-            ? {
-                name: editingUser.name,
-                email: editingUser.email,
-                roleId: editingUser.roleId,
-                status: editingUser.status,
-              }
-            : undefined
-        }
-        roles={roles}
-      />
     </Layout>
   );
+  
 };
 
 export default UsersPage;

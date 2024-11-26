@@ -28,12 +28,12 @@ const UserTable: React.FC<UserTableProps> = ({ users, roles, onEdit, onDelete })
   return (
     <Table headers={['Name', 'Email', 'Role', 'Status', 'Actions']}>
       {users.map((user) => (
-        <tr key={user.id} className="border-t">
-          <td className="py-4 px-6">{user.name}</td>
-          <td className="py-4 px-6">{user.email}</td>
-          <td className="py-4 px-6">{getRoleName(user.roleId)}</td>
-          <td className="py-4 px-6">{user.status}</td>
-          <td className="py-4 px-6 flex space-x-2">
+        <tr key={user.id} className="border-t w-full">
+          <td className="py-4 px-6 w-full">{user.name}</td>
+          <td className="py-4 px-6 w-full">{user.email}</td>
+          <td className="py-4 px-6 w-full">{getRoleName(user.roleId)}</td>
+          <td className="py-4 px-6 w-full">{user.status}</td>
+          <td className="py-4 px-6 w-full flex space-x-2">
             <button onClick={() => onEdit(user)} className="text-yellow-500 hover:text-yellow-700">
               <FaEdit />
             </button>
