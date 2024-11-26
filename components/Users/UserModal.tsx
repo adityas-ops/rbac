@@ -6,14 +6,14 @@ import UserForm from './UserForm';
 interface UserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; email: string; roleId: number; status: string }) => void;
+  onSubmit: (data: { name: string; email: string; roleId: string; status: string }) => void;
   initialData?: {
     name: string;
     email: string;
-    roleId: number;
+    roleId: string;
     status: string;
   };
-  roles: { id: number; name: string }[];
+  roles: { id: string; name: string }[];
 }
 
 const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, onSubmit, initialData, roles }) => {

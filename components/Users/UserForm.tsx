@@ -1,22 +1,43 @@
-// components/Users/UserForm.tsx
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface UserFormProps {
   initialData?: {
     name: string;
     email: string;
-    roleId: number;
+    roleId: string;
     status: string;
   };
-  roles: { id: number; name: string }[];
-  onSubmit: (data: { name: string; email: string; roleId: number; status: string }) => void;
+  roles: { id: string; name: string }[];
+  onSubmit: (data: { name: string; email: string; roleId: string; status: string }) => void;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ initialData, roles, onSubmit }) => {
   const [name, setName] = useState(initialData?.name || '');
   const [email, setEmail] = useState(initialData?.email || '');
-  const [roleId, setRoleId] = useState(initialData?.roleId || 0);
+  const [roleId, setRoleId] = useState(initialData?.roleId || '1');
   const [status, setStatus] = useState(initialData?.status || 'Active');
+  const [loginUsers, setLoginUsers] = useState<{ id: string; name: string; email: string }[]>([]);
+
+  useEffect(() => {
+    // Fetch login data from API
+    const fetchLoginUsers = async () => {
+      try {
+        const res = await axios.get('http://localhost:5001/Login'); // Update the URL if needed
+        setLoginUsers(res.data);
+      } catch (error) {
+        console.error('Error fetching login users:', error);
+      }
+    };
+
+    fetchLoginUsers();
+  }, []);
+
+  // Update email when name changes
+  useEffect(() => {
+    const selectedUser = loginUsers.find((user) => user.name === name);
+    setEmail(selectedUser?.email || '');
+  }, [name, loginUsers]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,22 +48,27 @@ const UserForm: React.FC<UserFormProps> = ({ initialData, roles, onSubmit }) => 
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-gray-700">Name</label>
-        <input
-          type="text"
+        <select
           className="w-full border px-3 py-2 rounded"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-        />
+        >
+          <option value="">Select Name</option>
+          {loginUsers.map((user) => (
+            <option key={user.id} value={user.name}>
+              {user.name}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label className="block text-gray-700">Email</label>
         <input
           type="email"
-          className="w-full border px-3 py-2 rounded"
+          className="w-full border px-3 py-2 rounded bg-gray-100"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          readOnly
         />
       </div>
       <div>
@@ -50,7 +76,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData, roles, onSubmit }) => 
         <select
           className="w-full border px-3 py-2 rounded"
           value={roleId}
-          onChange={(e) => setRoleId(Number(e.target.value))}
+          onChange={(e) => setRoleId(e.target.value)}
           required
         >
           <option value="">Select Role</option>

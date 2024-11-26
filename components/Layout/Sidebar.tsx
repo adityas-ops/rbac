@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-gray-800 text-white min-h-screen">
-      <div className="p-4 text-2xl font-bold">RBAC</div>
+      <div className="p-4 text-2xl text-center font-bold">RBAC</div>
       <ul>
         {menu.map((item) => (
           <li key={item.name} className={`hover:bg-gray-700 ${router.pathname === item.path ? 'bg-gray-700' : ''}`}>

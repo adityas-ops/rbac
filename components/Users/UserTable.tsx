@@ -1,25 +1,29 @@
-// components/Users/UserTable.tsx
 import React from 'react';
 import Table from '../common/Table';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  roleId: number;
+  roleId: string;
   status: string;
+}
+
+interface Role {
+  id: string;
+  name: string;
 }
 
 interface UserTableProps {
   users: User[];
-  roles: { id: number; name: string }[];
+  roles: Role[];
   onEdit: (user: User) => void;
-  onDelete: (userId: number) => void;
+  onDelete: (userId: string) => void;
 }
 
 const UserTable: React.FC<UserTableProps> = ({ users, roles, onEdit, onDelete }) => {
-  const getRoleName = (roleId: number) => roles.find((role) => role.id === roleId)?.name || 'N/A';
+  const getRoleName = (roleId: string) => roles.find((role) => role.id === roleId)?.name || 'N/A';
 
   return (
     <Table headers={['Name', 'Email', 'Role', 'Status', 'Actions']}>

@@ -1,4 +1,3 @@
-// pages/users/index.tsx
 import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
 import UserTable from '../../components/Users/UserTable';
@@ -7,15 +6,15 @@ import Button from '../../components/common/Button';
 import axios from 'axios';
 
 interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  roleId: number;
+  roleId: string;
   status: string;
 }
 
 interface Role {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -58,7 +57,7 @@ const UsersPage = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (userId: number) => {
+  const handleDelete = async (userId: string) => {
     if (confirm('Are you sure you want to delete this user?')) {
       try {
         await axios.delete(`http://localhost:5001/users/${userId}`);
@@ -69,8 +68,15 @@ const UsersPage = () => {
     }
   };
 
-  const handleSubmit = async (data: { name: string; email: string; roleId: number; status: string }) => {
+  const handleSubmit = async (data: { name: string; email: string; roleId: string; status: string }) => {
     try {
+      // Validate roleId
+      const roleExists = roles.find((role) => role.id === data.roleId);
+      if (!roleExists) {
+        alert('Invalid role selected!');
+        return;
+      }
+
       if (editingUser) {
         // Update user
         await axios.put(`http://localhost:5001/users/${editingUser.id}`, { ...editingUser, ...data });
@@ -79,7 +85,7 @@ const UsersPage = () => {
         await axios.post('http://localhost:5001/users', data);
       }
       setIsModalOpen(false);
-      fetchUsers();
+      fetchUsers(); // Refresh user list
     } catch (error) {
       console.error('Error saving user:', error);
     }

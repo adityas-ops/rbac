@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex">
+    <div className="flex w-full h-screen overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />

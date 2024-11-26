@@ -23,7 +23,6 @@ const Dashboard = () => {
   const [roles, setRoles] = useState<number>(0);
   const [activeSessions, setActiveSessions] = useState<number>(0);
   const [userActivity, setUserActivity] = useState<{ month: string; count: number }[]>([]);
-  const [recentActivities, setRecentActivities] = useState<{ id: number; user: string; action: string; time: string }[]>([]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -47,13 +46,6 @@ const Dashboard = () => {
         { month: 'Apr', count: 60 },
         { month: 'May', count: 80 },
         { month: 'Jun', count: 65 },
-      ]);
-
-      // Mock recent activities
-      setRecentActivities([
-        { id: 1, user: 'John Doe', action: 'Logged In', time: '2024-04-25 10:30 AM' },
-        { id: 2, user: 'Jane Smith', action: 'Updated Role', time: '2024-04-25 11:00 AM' },
-        { id: 3, user: 'Mike Johnson', action: 'Deleted User', time: '2024-04-25 12:15 PM' },
       ]);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -102,28 +94,6 @@ const Dashboard = () => {
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <h2 className="text-xl font-bold mb-4">User Activity Trends</h2>
         <Line data={chartData} />
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-4">Recent User Activities</h2>
-        <table className="min-w-full bg-white">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase">User</th>
-              <th className="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase">Action</th>
-              <th className="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentActivities.map((activity) => (
-              <tr key={activity.id} className="border-t">
-                <td className="py-4 px-6">{activity.user}</td>
-                <td className="py-4 px-6">{activity.action}</td>
-                <td className="py-4 px-6">{activity.time}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </Layout>
   );

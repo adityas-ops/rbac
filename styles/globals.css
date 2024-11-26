@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 
+
+.loginPage{
+    background-image: radial-gradient(circle, #0085ff, #0070d6, #005baf, #004789, #003465);
+}

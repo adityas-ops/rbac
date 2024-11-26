@@ -1,39 +1,124 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "roleId": 1,
-        "status": "Active"
-      },
-      {
-        "id": 2,
-        "name": "Admin User",
-        "email": "admin@example.com",
-        "password": "admin123",
-        "role": "admin"
-      },
-      {
-        "id": 3,
-        "name": "Regular User",
-        "email": "user@example.com",
-        "password": "user123",
-        "role": "user"
-      }
-    ],
-    "roles": [
-      {
-        "id": 1,
-        "name": "Admin",
-        "description": "Full access to all resources",
-        "permissions": [1, 2, 3]
-      }
-    ],
-    "permissions": [
-      { "id": 1, "name": "Read" },
-      { "id": 2, "name": "Write" },
-      { "id": 3, "name": "Delete" }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": "0f1f",
+      "name": "Aditya",
+      "email": "adityaops@gmail.com",
+      "roleId": "1",
+      "status": "Active",
+      "username": "adityaops"
+    },
+    {
+      "id": "db88",
+      "name": "ankit sharma",
+      "email": "ankit@gmail.com",
+      "roleId": "33b5",
+      "status": "Inactive",
+      "username": "boma"
+    },
+    {
+      "id": "3c6d",
+      "name": "adi sakti ",
+      "email": "adityakushinagar123@gmail.com",
+      "roleId": "b36b",
+      "status": "Active"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "description": "Full access to all resources",
+      "permissions": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "15d2",
+      "name": "CTO",
+      "description": "this is CTO",
+      "permissions": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "b36b",
+      "name": "Marketing",
+      "description": "this is marketing team ",
+      "permissions": [
+        1
+      ]
+    },
+    {
+      "id": "33b5",
+      "name": "Sales ",
+      "description": "this is Sales team ",
+      "permissions": [
+        1,
+        2
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "id": "1",
+      "name": "Read"
+    },
+    {
+      "id": "2",
+      "name": "Write"
+    },
+    {
+      "id": "3",
+      "name": "Delete"
+    }
+  ],
+  "Login": [
+    {
+      "id": "1",
+      "email": "adityaops@gmail.com",
+      "name": "Aditya",
+      "password": "aditya123",
+      "username": "adityaops"
+    },
+    {
+      "id": "bfe2",
+      "email": "adityaops@gmail.com",
+      "name": "Aditya",
+      "password": "1234",
+      "username": "adityaops"
+    },
+    {
+      "id": "1184",
+      "email": "boma@gmail.com",
+      "name": "ankit sharma",
+      "password": "12345",
+      "username": "boma"
+    },
+    {
+      "id": "f625",
+      "username": "avinash gandu",
+      "name": "avinash",
+      "password": "12345",
+      "email": "chodu@gmail.com"
+    },
+    {
+      "id": "d450",
+      "username": "adisakti",
+      "name": "adi sakti ",
+      "password": "12345",
+      "email": "adityakushinagar123@gmail.com"
+    },
+    {
+      "id": "0b37",
+      "username": "john",
+      "name": "john cena",
+      "password": "1234",
+      "email": "john@gmail.com"
+    }
+  ]
+}
