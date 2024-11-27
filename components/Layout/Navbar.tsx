@@ -1,35 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import router from 'next/router';
+import React, { useEffect, useState } from "react";
+import router from "next/router";
 
 const Navbar = () => {
   const [user, setUser] = useState<{ name: string } | null>(null);
 
   useEffect(() => {
     // Ensure this runs only on the client
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
       } catch (error) {
-        console.error('Failed to parse user data:', error);
+        console.error("Failed to parse user data:", error);
       }
     }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-    setInterval(() => {
-     router.push('/login');
-    }
-    , 500);
-  }
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
 
   return (
     <nav className=" fixed top-0 left-0 right-0  bg-white shadow-2xl border-b p-4 flex justify-between items-center">
       <div className="text-black pl-[50px] font-[700] text-[1.25rem] ">
-        {user ? `Welcome, ${user.name}!` : 'Welcome, Guest!'}
+        {user ? `Welcome, ${user.name}!` : "Welcome, Guest!"}
       </div>
       <button
         onClick={logout}

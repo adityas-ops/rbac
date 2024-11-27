@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface UserFormProps {
   initialData?: {
@@ -9,45 +9,37 @@ interface UserFormProps {
     status: string;
   };
   roles: { id: string; name: string }[];
-  onSubmit: (data: {
-    name: string;
-    email: string;
-    roleId: string;
-    status: string;
-  }) => void;
+  onSubmit: (data: { name: string; email: string; roleId: string; status: string }) => void;
+  users: { email: string }[]; // Add this prop
 }
 
-const UserForm: React.FC<UserFormProps> = ({
-  initialData,
-  roles,
-  onSubmit,
-}) => {
-  const [email, setEmail] = useState(initialData?.email || "");
-  const [name, setName] = useState(initialData?.name || "");
-  const [roleId, setRoleId] = useState(initialData?.roleId || "1");
-  const [status, setStatus] = useState(initialData?.status || "Active");
-  const [loginUsers, setLoginUsers] = useState<
-    { id: string; name: string; email: string }[]
-  >([]);
+const UserForm: React.FC<UserFormProps> = ({ initialData, roles, onSubmit, users }) => {
+  const [email, setEmail] = useState(initialData?.email || '');
+  const [name, setName] = useState(initialData?.name || '');
+  const [roleId, setRoleId] = useState(initialData?.roleId || '1');
+  const [status, setStatus] = useState(initialData?.status || 'Active');
+  const [loginUsers, setLoginUsers] = useState<{ id: string; name: string; email: string }[]>([]);
 
   useEffect(() => {
-    // Fetch login data from API
     const fetchLoginUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/Login"); // Update the URL if needed
+        const res = await axios.get('http://localhost:5001/Login'); // Adjust URL if needed
         setLoginUsers(res.data);
       } catch (error) {
-        console.error("Error fetching login users:", error);
+        console.error('Error fetching login users:', error);
       }
     };
-
     fetchLoginUsers();
   }, []);
 
-  // Update name when email changes
+  // Filter out emails that already have a role
+  const availableEmails = loginUsers.filter(
+    (loginUser) => !users?.some((user) => user.email === loginUser.email)
+  );
+
   useEffect(() => {
     const selectedUser = loginUsers.find((user) => user.email === email);
-    setName(selectedUser?.name || "");
+    setName(selectedUser?.name || '');
   }, [email, loginUsers]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,7 +51,7 @@ const UserForm: React.FC<UserFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-gray-700">Email</label>
-        <div className=" relative">
+        <div className="relative">
           <select
             className="w-full border border-black px-3 py-2 appearance-none relative rounded"
             value={email}
@@ -67,7 +59,7 @@ const UserForm: React.FC<UserFormProps> = ({
             required
           >
             <option value="">Select Email</option>
-            {loginUsers.map((user) => (
+            {availableEmails.map((user) => (
               <option key={user.id} value={user.email}>
                 {user.email}
               </option>
@@ -82,11 +74,7 @@ const UserForm: React.FC<UserFormProps> = ({
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
@@ -94,12 +82,9 @@ const UserForm: React.FC<UserFormProps> = ({
       {name && (
         <div>
           <label className="block text-gray-700">Name</label>
-          <div className="w-full border px-3 py-2 rounded bg-gray-100">
-            {name}
-          </div>
+          <div className="w-full border px-3 py-2 rounded bg-gray-100">{name}</div>
         </div>
       )}
-
       <div>
         <label className="block text-gray-700">Role</label>
         <div className="relative">
@@ -125,11 +110,7 @@ const UserForm: React.FC<UserFormProps> = ({
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
@@ -138,7 +119,7 @@ const UserForm: React.FC<UserFormProps> = ({
         <label className="block text-gray-700">Status</label>
         <div className="relative">
           <select
-            className="w-full border appearance-none border-black px-3  py-2 rounded"
+            className="w-full border appearance-none border-black px-3 py-2 rounded"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             required
@@ -155,11 +136,7 @@ const UserForm: React.FC<UserFormProps> = ({
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>

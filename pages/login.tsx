@@ -1,63 +1,80 @@
 // pages/login.tsx
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import LoginForm from "../components/LoginForm";
 import { useRouter } from "next/router";
 import axios from "axios";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [user, setUser] = useState<unknown>(null);
+  // const [user, setUser] = useState<unknown>(null);
+
+
+
+
+  useEffect(() => {
+    // Clear any existing user data when landing on the login page
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+  }, []);
 
   const handleLogin = async (username: string, password: string) => {
-    // Mock authentication logic for admin
-    if (username === "admin" && password === "password") {
-      localStorage.setItem("isAuthenticated", "true");
-      router.push("/");
-    } else {
-      try {
-        const res = await axios.get("http://localhost:5001/Login");
-        const data = res.data;
+    if (username === "admin" && password === "1234") {
+      const adminUser = {
+        id: "9404",
+        name: "admin",
+        email: "admin@example.com",
+        roleId: "1",
+        status: "Active",
+      };
 
-        // Check if username and password match any record in the array and find role of the user
-        const user = data.find(
-          (user: { username: string; password: string }) =>
-            user.username === username && user.password === password
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("user", JSON.stringify(adminUser));
+
+      // Navigate to home page
+      router.replace("/"); // Replace instead of push to prevent login page in history
+      return;
+    }
+
+    try {
+      const res = await axios.get("http://localhost:5001/Login");
+      const loginData = res.data;
+
+      const matchedUser = loginData.find(
+        (user: { username: string; password: string }) =>
+          user.username === username && user.password === password
+      );
+
+      if (matchedUser) {
+        const userRes = await axios.get("http://localhost:5001/users");
+        const users = userRes.data;
+
+        const foundUser = users.find(
+          (u: { username: string }) => u.username === username
         );
 
-        if (user) {
-          // console.log('Login is happening');
-          const res = await axios.get("http://localhost:5001/users");
-          const users = res.data;
-          //  find the user in the users array and set the user in the state
-          const finding = users.find(
-            (u: { username: string }) => u.username === username
-          );
-          if (finding) {
-            setUser(finding);
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("user", JSON.stringify(finding));
-            if (finding.roleId === "1") {
-              router.push("/");
-            } else {
-              localStorage.setItem("user", JSON.stringify(finding));
-              localStorage.setItem("isAuthenticated", "true");
-              router.push("/welcome");
-            }
-          }
+        if (foundUser) {
           localStorage.setItem("isAuthenticated", "true");
-           localStorage.setItem("user", JSON.stringify(user));
-          router.push("/welcome");
-        } else {
-          router.push("/signin");
+          localStorage.setItem("user", JSON.stringify(foundUser));
+
+          // Redirect based on role
+          const targetRoute = foundUser.roleId === "1" ? "/" : "/welcome";
+          router.replace(targetRoute);
         }
-      } catch (error) {
-        console.error("Error during login:", error);
-        alert("An error occurred during login. Please try again.");
+        else{
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("user", JSON.stringify(matchedUser));
+          router.replace("/welcome")
+        }
+      } else {
+        alert("Invalid username or password!");
       }
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An error occurred during login. Please try again.");
     }
   };
-
-  console.log("User--", user);
+  
+  
 
   return (
     <div className=" h-screen overflow-hidden relative loginPage flex items-center justify-center">

@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  useEffect(() => {
-    // Ensure this logic runs only on the client
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    const user = localStorage.getItem('user');
+  const checkAuth = () => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    const user = localStorage.getItem("user");
 
     if (!isAuthenticated || !user) {
-      router.push('/login');
+      router.replace("/login");
     } else {
-      setIsAuthorized(true); 
+      setIsAuthorized(true);
     }
-  }, [router]);
+  };
+
+  useEffect(() => {
+    checkAuth();
+
+    // Listen for localStorage changes (e.g., login/logout events)
+    window.addEventListener("storage", checkAuth);
+
+    return () => window.removeEventListener("storage", checkAuth);
+  }, []);
 
   if (!isAuthorized) {
-    return null; 
+    return null; // Prevent rendering until authentication is verified
   }
 
   return <>{children}</>;

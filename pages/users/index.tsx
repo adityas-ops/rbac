@@ -31,10 +31,11 @@ const UsersPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get<User[]>('http://localhost:5001/users');
-      setUsers(res.data);
+      const response = await axios.get('http://localhost:5001/users');
+      setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
+      setUsers([]); // Fallback to an empty array
     }
   };
 
@@ -91,6 +92,8 @@ const UsersPage = () => {
     }
   };
 
+  
+
   return (
     <Layout>
       <div className="w-full h-full   ">
@@ -118,6 +121,7 @@ const UsersPage = () => {
                 : undefined
             }
             roles={roles}
+            users={users}
           />
         )}
       </div>

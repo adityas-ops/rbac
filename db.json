@@ -9,26 +9,25 @@
       "username": "adityaops"
     },
     {
-      "id": "db88",
-      "name": "ankit sharma",
-      "email": "ankit@gmail.com",
-      "roleId": "33b5",
-      "status": "Inactive",
-      "username": "boma"
+      "id": "9404",
+      "name": "admin",
+      "email": "admin@example.com",
+      "roleId": "1",
+      "status": "Active"
     },
     {
-      "id": "3c6d",
-      "name": "adi sakti ",
-      "email": "adityakushinagar123@gmail.com",
+      "id": "25f6",
+      "name": "Bob Williams",
+      "email": "bobbyw@example.com",
       "roleId": "b36b",
       "status": "Active"
     },
     {
-      "id": "f3d5",
-      "name": "john cena",
-      "email": "john@gmail.com",
-      "roleId": "b36b",
-      "status": "Inactive"
+      "id": "343c",
+      "name": "Peter Parker",
+      "email": "peter.parker@example.com",
+      "roleId": "33b5",
+      "status": "Active"
     }
   ],
   "roles": [
@@ -86,32 +85,11 @@
   ],
   "Login": [
     {
-      "id": "1",
-      "email": "adityaops@gmail.com",
-      "name": "Aditya",
-      "password": "aditya123",
-      "username": "adityaops"
-    },
-    {
       "id": "bfe2",
       "email": "adityaops@gmail.com",
       "name": "Aditya",
       "password": "1234",
       "username": "adityaops"
-    },
-    {
-      "id": "1184",
-      "email": "boma@gmail.com",
-      "name": "ankit sharma",
-      "password": "12345",
-      "username": "boma"
-    },
-    {
-      "id": "f625",
-      "username": "avinash gandu",
-      "name": "avinash",
-      "password": "12345",
-      "email": "chodu@gmail.com"
     },
     {
       "id": "d450",
@@ -126,6 +104,76 @@
       "name": "john cena",
       "password": "1234",
       "email": "john@gmail.com"
+    },
+    {
+      "id": "2601",
+      "username": "janesmith",
+      "name": "Jane Smith",
+      "password": "1234",
+      "email": "janesmith@example.com"
+    },
+    {
+      "id": "df47",
+      "username": "alicej",
+      "name": "Alice Johnson",
+      "password": "1234",
+      "email": "alicej@example.com"
+    },
+    {
+      "id": "3e13",
+      "username": "bobbyw",
+      "name": "Bob Williams",
+      "password": "1234",
+      "email": "bobbyw@example.com"
+    },
+    {
+      "id": "7457",
+      "username": "charlieb",
+      "name": "Charlie Brown",
+      "password": "1234",
+      "email": "charlieb@example.com"
+    },
+    {
+      "id": "535a",
+      "username": "wonderwoman",
+      "name": "Diana Prince",
+      "password": "1234",
+      "email": "diana.prince@example.com"
+    },
+    {
+      "id": "5f11",
+      "username": "superman",
+      "name": "Clark Kent",
+      "password": "1234",
+      "email": "clark.kent@example.com"
+    },
+    {
+      "id": "f5a3",
+      "username": "batman",
+      "name": "Bruce Wayne",
+      "password": "1234",
+      "email": "bruce.wayne@example.com"
+    },
+    {
+      "id": "d95f",
+      "username": "spiderman",
+      "name": "Peter Parker",
+      "password": "1234",
+      "email": "peter.parker@example.com"
+    },
+    {
+      "id": "6bdb",
+      "username": "admin",
+      "name": "admin",
+      "password": "1234",
+      "email": "admin@example.com"
+    },
+    {
+      "id": "9953",
+      "username": "adi",
+      "name": "adi",
+      "password": "1234",
+      "email": "adi@example.com"
     }
   ]
 }
