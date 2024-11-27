@@ -36,7 +36,7 @@ function Index() {
             {user ? `Welcome, ${user.name}!` : 'Welcome, Guest!'}
           </p>
           <p>
-            Please wait while admin approves your account.
+            Please wait while admin approves your account and assign you a role as admin. 
           </p>
           <button
             onClick={handleLogout}
